@@ -23,6 +23,15 @@ public class RadioTest {
         int actual = radio.getCurrentChannel();
         assertEquals(expected, actual);
     }
+    @Test
+    void IncreaseChannels20() {
+        Radio radio = new Radio(20);
+        radio.setCurrentChannel(7);
+        radio.nextChannel();
+        int expected = 8;
+        int actual = radio.getCurrentChannel();
+        assertEquals(expected, actual);
+    }
 
     @Test
     void decreaseChannel() {
@@ -33,11 +42,29 @@ public class RadioTest {
         int actual = radio.getCurrentChannel();
         assertEquals(expected, actual);
     }
+    @Test
+    void decreaseChannels20() {
+        Radio radio = new Radio(20);
+        radio.setCurrentChannel(12);
+        radio.prevChannel();
+        int expected = 8;
+        int actual = radio.getCurrentChannel();
+        assertEquals(expected, actual);
+    }
 
     @Test
     void returnMinChannel() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(15);
         radio.setCurrentChannel(14);
+        radio.nextChannel();
+        int expected =0;
+        int actual = radio.getCurrentChannel();
+        assertEquals(expected, actual);
+    }
+    @Test
+    void returnMinChannel20() {
+        Radio radio = new Radio(20);
+        radio.setCurrentChannel(20);
         radio.nextChannel();
         int expected =0;
         int actual = radio.getCurrentChannel();
@@ -46,7 +73,16 @@ public class RadioTest {
 
     @Test
     void returnMaxChannel() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(15);
+        radio.setCurrentChannel(0);
+        radio.prevChannel();
+        int expected = 9;
+        int actual = radio.getCurrentChannel();
+        assertEquals(expected, actual);
+    }
+    @Test
+    void returnMaxChannel25() {
+        Radio radio = new Radio(25);
         radio.setCurrentChannel(0);
         radio.prevChannel();
         int expected = 9;
@@ -56,7 +92,7 @@ public class RadioTest {
 
 
     @Test
-    void setChannelOverMax() {
+    void channelOverMax() {
         Radio radio = new Radio();
         int expected = 9;
         radio.setCurrentChannel(20);
@@ -65,8 +101,8 @@ public class RadioTest {
     }
 
     @Test
-    void setChannelBelowMin() {
-        Radio radio = new Radio();
+    void channelBelowMin() {
+        Radio radio = new Radio(15);
         int expected = 0;
         radio.setCurrentChannel(-20);
         int actual = radio.getCurrentChannel();
@@ -75,8 +111,8 @@ public class RadioTest {
 
     @Test
     void setCurrentVolume() {
-        Radio radio = new Radio();
-        int expected = 4;
+        Radio radio = new Radio(15);
+        int expected = 9;
         radio.setCurrentVolume(expected);
         int actual = radio.getCurrentVolume();
         assertEquals(expected, actual);
@@ -125,7 +161,7 @@ public class RadioTest {
 
     @Test
     void setVolumeOverMax() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(15);
         int expected = 100;
         radio.setCurrentVolume(150);
         int actual = radio.getCurrentVolume();
@@ -134,7 +170,7 @@ public class RadioTest {
 
     @Test
     void sVolumeBelowMin() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(15);
         int expected = 0;
         radio.setCurrentVolume(-50);
         int actual = radio.getCurrentVolume();

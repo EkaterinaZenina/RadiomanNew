@@ -8,6 +8,11 @@ public class Radio {
     private int minVolume;
     private int maxVolume = 100;
 
+    public Radio() {
+    }
+    public Radio(int channels) {
+    }
+
 
     public int getCurrentChannel() {
        return currentChannel;
