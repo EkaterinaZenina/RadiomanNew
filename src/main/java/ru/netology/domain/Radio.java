@@ -1,53 +1,52 @@
 package ru.netology.domain;
 
 public class Radio {
-    private int channelAmount = 20;
     private int currentChannel;
-    private final int minChannel = 0;
-    private final int maxChannel = 9;
-
-    public Radio() {
-    }
-    public Radio( int channelAmount) {
-        this.channelAmount = channelAmount;
-    }
-
+    private int minChannel = 0;
+    private int maxChannel = 9;
 
     public int getCurrentChannel() {
-       return currentChannel;
+        return currentChannel;
     }
 
     public void setCurrentChannel(int currentChannel) {
-        if (currentChannel > channelAmount - 1) {
+        if (currentChannel > maxChannel){
+            this.currentChannel = maxChannel;
             return;
         }
-        if (currentChannel < minChannel) {
+        this.currentChannel = currentChannel;
+
+        if (currentChannel< minChannel){
+            this.currentChannel = minChannel;
             return;
         }
         this.currentChannel = currentChannel;
     }
 
     public void nextChannel(){
-        if (currentChannel == maxChannel ) {
-           currentChannel = channelAmount + 1;
+        if (currentChannel < 9) {
+            this.currentChannel = currentChannel +1;
+            return;
         }
-        else {
-            currentChannel = currentChannel + 1;
+        if (currentChannel == maxChannel) {
+            this.currentChannel = minChannel;
+            return;
         }
 
     }
     public void prevChannel(){
-        if (currentChannel == minChannel){
-            this.currentChannel = channelAmount -1;
+        if (currentChannel > 0){
+            this.currentChannel = currentChannel -1;
+            return;
         }
-        else {
-            this.currentChannel = currentChannel - 1;
+        if (currentChannel == minChannel){
+            this.currentChannel = maxChannel;
+            return;
         }
     }
-
     private int currentVolume;
-    private final int minVolume = 0;
-    private final int maxVolume = 10;
+    private int minVolume = 0;
+    private int maxVolume = 10;
 
     public int getCurrentVolume() {
         return currentVolume;
@@ -58,6 +57,8 @@ public class Radio {
             this.currentVolume = maxVolume;
             return;
         }
+        this.currentVolume=currentVolume;
+
         if (currentVolume < minVolume) {
             this.currentVolume = minVolume;
             return;
